@@ -15,20 +15,32 @@ Page({
 
   wxLogin:function(){
     console.log('ssss')
-    wx.login({
-      success:res=>{
-        console.log(res)
-      }
-    })
-    // wx.getUserInfo({
-    //   success: res => {
-    //     app.globalData.userInfo = res.userInfo
-    //     this.setData({
-    //       username: res.userInfo.nickName,
-    //       headerimagesrc: res.userInfo.avatarUrl,
-    //     })
+
+    // wx.openSetting({
+    //   success: (res) => {
+        
+    //       res.authSetting = {
+    //        "scope.userInfo": false,
+    //        "scope.userLocation": true
+    //       }
+         
     //   }
     // })
+    // wx.login({
+    //   success:res=>{
+    //     console.log(res)
+    //   }
+    // })
+
+    wx.getUserInfo({
+      success: res => {
+        app.globalData.userInfo = res.userInfo
+        this.setData({
+          username: res.userInfo.nickName,
+          headerimagesrc: res.userInfo.avatarUrl,
+        })
+      }
+    })
   },
 
   /**
