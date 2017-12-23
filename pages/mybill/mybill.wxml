@@ -1,0 +1,9 @@
+<!--pages/mybill/mybill.wxml-->
+<view class="container">
+<view class='has-no-bill'>
+
+<image class='bill-blank-image' src="/images/bill-blank-image.png"></image>
+<text>你还没有账单</text>
+</view>
+
+</view>

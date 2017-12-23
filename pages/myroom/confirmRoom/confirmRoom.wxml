@@ -1,0 +1,15 @@
+<!--pages/myroom/confirmRoom/confirmRoom.wxml-->
+<view class="container">
+  <view class='room-info'>
+
+  </view>
+
+  <view class='btn-wrapper'>
+    <button bindtap="chooseTheHouse">绑定该房源</button>
+  </view>
+
+  <view class='tip-wrapper'>
+  <text>绑定该房源后，即可通过小程序给房东交租，如要退房，请联系房东进行操作</text>
+  </view>
+
+</view>

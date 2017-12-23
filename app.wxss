@@ -1,0 +1,33 @@
+/**app.wxss**/
+/* .container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}  */
+
+
+html,page,.container{
+ height:  100%;
+} 
+.container{
+  background: #F2F2F5;
+}
+
+
+button{
+  display: inline-block;
+  background-color:rgba(46,138,230,1);
+  border-radius: 10rpx ; 
+  font-size:34rpx;
+  color:rgba(255,255,255,1);
+  line-height:48rpx;
+}
+
+button:active{
+  background-color:rgba(41,123,206,1);
+  color:rgba(255,255,255,1);
+}

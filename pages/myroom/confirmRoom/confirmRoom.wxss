@@ -1,0 +1,35 @@
+/* pages/myroom/confirmRoom/confirmRoom.wxss */
+.container{
+  padding-top: 30rpx;
+  box-sizing: border-box;
+}
+
+.room-info{
+  background-color: white;
+  height: 276rpx;
+}
+
+.btn-wrapper {
+  margin-top: 124rpx;
+  text-align: center;
+}
+
+.btn-wrapper button{
+  width: 480rpx;
+  padding-top: 23rpx;
+  padding-bottom: 23rpx;
+}
+
+.tip-wrapper{
+  margin-top: 40rpx;
+  text-align: center;
+}
+
+.tip-wrapper text{
+  display: inline-block;
+  text-align: left;
+  width: 480rpx;
+  font-size:24rpx;
+  color:rgba(127,131,137,1);
+  line-height:33rpx;
+}
