@@ -5,15 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-    operaTypes: ['pay-success-rent', 'pay-fail-password-error', 'pay-fail-some-error','confirm-house-success'],
-    operaType: 'confirm-house-success',
+    operaTypes: { confirm_house_success: '绑定成功',
+     pay_success_rent: '交租成功', 
+     pay_fail_password_error: '支付失败', 
+     pay_fail_some_error: '支付失败' },
+    operaType: 'none',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      operaType: options.operaType
+    })
+    wx.setNavigationBarTitle({
+      title: this.data.operaTypes[this.data.operaType]
+    })
+  },
+
+  backToIndexPage:function(){
+    wx.navigateBack({
+      delta: 1
+    })
   },
 
   /**

@@ -1,48 +1,61 @@
-// pages/myroom/myroom.js
+// pages/mybill/billdetail/billdetail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isBlankRoom:true,
+    payStatuss: {
+      nopay: '确认账单',
+      haspay: '账单详情',
+    },
+    payStatus: 'haspay',
   },
 
-
-  toSearchRoomPage:function(){
-    wx.navigateTo({
-      url: '../myroom/searchRoom/searchRoom'
+  payTheRenter:function(){
+    wx.requestPayment({
+      'timeStamp': '',
+      'nonceStr': '',
+      'package': '',
+      'signType': 'MD5',
+      'paySign': '',
+      'success': function (res) {
+      },
+      'fail': function (res) {
+      }
     })
   },
-
-
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('onLoad')
+    this.setData({
+      payStatus: options.payStatus
+    })
+    wx.setNavigationBarTitle({
+      title: this.data.payStatuss[this.data.payStatus]
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log('onReady')
+  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('onShow')
+  
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log('onHide')
+  
   },
 
   /**

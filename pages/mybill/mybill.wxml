@@ -1,9 +1,42 @@
 <!--pages/mybill/mybill.wxml-->
 <view class="container">
-<view class='has-no-bill'>
+  <view wx:if='{{isBlankBill}}' class='has-no-bill'>
+    <image class='bill-blank-image' src="/images/bill-blank-image.png"></image>
+    <text>你还没有账单</text>
+  </view>
 
-<image class='bill-blank-image' src="/images/bill-blank-image.png"></image>
-<text>你还没有账单</text>
-</view>
+  <view wx:else class='has-bill'>
+    <view class='my-top-tab'>
 
+      <view data-paystatus="nopay" class='tab-item {{payStatus==="nopay"?"tab-item-select":""}}'   bindtap='payTabClick'>
+        <text>待支付</text>
+      </view>
+
+      <view data-paystatus="haspay" class='tab-item {{payStatus==="haspay"?"tab-item-select":""}}' bindtap='payTabClick'>
+        <text>已支付</text>
+      </view>
+
+    </view>
+
+    <view class='list-wrapper' wx:if="{{ payStatus==='nopay'}}">
+      <view class='bill-item' wx:for="{{noPayOrederList}}" wx:key  bindtap='toBillDeatil'>
+      <view class='bill-item-title-wrapper'>
+        <text class='bill-item-title'>2017年12月房租</text>
+        <text class='bill-item-time'>2017/11/20-2017/12/19</text>
+      </view>
+      <text class='bill-item-money'>5000</text>
+      </view>
+    </view>
+    
+    <view class='list-wrapper' wx:else>
+      <view class='bill-item' wx:for="{{hasPayOrederList}}" wx:key bindtap='toBillDeatil'>
+      <view class='bill-item-title-wrapper' >
+        <text class='bill-item-title'>2017年12月房租</text>
+        <text class='bill-item-time'>2017/11/20-2017/12/19</text>
+      </view>
+      <text class='bill-item-money has-pay'>5000</text>
+      </view>
+    </view>
+
+  </view>
 </view>

@@ -5,7 +5,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    isBlankBill:false,
+    payStatus:'nopay',
+    noPayOrederList: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+    hasPayOrederList: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+  },
+
+
+  payTabClick: function (e) {
+    this.setData({
+      payStatus: e.currentTarget.dataset.paystatus
+    })
+  },
+
+  toBillDeatil:function(){
+    console.log('sbsbsb')
+    var payStatus = this.data.payStatus
+    wx.navigateTo({
+      url: "/pages/mybill/billdetail/billdetail?payStatus=" + payStatus
+    })
   },
 
   /**

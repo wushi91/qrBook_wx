@@ -4,9 +4,39 @@
   box-sizing: border-box;
 }
 
-.room-info{
+
+.input-wrapper{
+  padding: 20rpx 30rpx;
   background-color: white;
-  height: 276rpx;
+  font-size:34rpx;
+  color:black;
+  display: flex;
+  
+}
+
+.input-wrapper+.input-wrapper{
+  margin-top: 30rpx;
+  
+}
+
+.input-wrapper .phone-num{
+  
+  display: inline-block;
+  flex:1;
+}
+
+.input-wrapper .message-code{
+  
+  display: inline-block;
+  flex:1;
+}
+
+.input-wrapper .get-message-code{
+  font-size:34rpx;
+  color:#F24949 ;
+  padding-left: 60rpx;
+  padding-right: 30rpx;
+  border-left: 1px solid #B3B3B3;
 }
 
 .btn-wrapper {

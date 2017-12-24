@@ -7,13 +7,33 @@ Page({
   data: {
     region: ['广东省', '深圳市', '海珠区'],
     houseGuessList: [{ name: 'B101' }, { name: 'B201' }, { name: 'B301' }, { name: 'B401' }],
+    i:0,
   },
 
 
   toConfirmTheHouse: function () {
-    console.log('sssss')
-    wx.navigateTo({
-      url: '/pages/myroom/confirmRoom/confirmRoom'
+    if(this.data.i===0){
+      this.roomHasNoTips()
+      this.setData({
+        i: 1
+      })
+    }
+    else{
+      wx.redirectTo({
+        url: '/pages/myroom/confirmRoom/confirmRoom'
+      })
+    }
+    
+    
+  },
+
+  roomHasNoTips: function () {
+    wx.showModal({
+      title: '没有找到该房源',
+      content: '请先联系房东添加房源和租客信息',
+      showCancel: false,
+      confirmText: '确定',
+      confirmColor: '#2E8AE6',
     })
   },
 

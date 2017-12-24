@@ -9,7 +9,9 @@ Page({
   },
 
   chooseTheHouse:function(){
-
+    wx.redirectTo({
+      url: "/pages/operaResult/operaResult?operaType=confirm_house_success",
+    })
   },
 
   /**

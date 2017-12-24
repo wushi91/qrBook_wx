@@ -10,10 +10,12 @@
 }  */
 
 
-html,page,.container{
- height:  100%;
+html,page{
+ min-height:  100%;
+ display: flex;
 } 
 .container{
+  flex: 1;
   background: #F2F2F5;
 }
 
