@@ -14,7 +14,7 @@
 
 .choose-city text{
   font-size:34rpx;
-  color:rgba(178,178,178,1);
+  color:rgba(0,0,0,1);
   line-height:48rpx;
 }
 

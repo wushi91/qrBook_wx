@@ -1,24 +1,83 @@
-// pages/myroom/confirmRoom/confirmRoom.js
+const request = require('../../../utils/request.js')
+const util = require('../../../utils/util.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    phoneNum:'',
+    messageCode:'',
+    bookid:''
   },
 
   chooseTheHouse:function(){
-    wx.redirectTo({
-      url: "/pages/operaResult/operaResult?operaType=confirm_house_success",
+    //首先验证短信码
+    request.requestCheckMessageCode(this.data.phoneNum, this.data.messageCode,res=>{
+      console.log('验证短信码')
+      console.log(res.data)
+      if (res.data.msg==="0"){
+        //之后要进行绑定房源
+        this.bindTheHouse()
+      }
+    })
+    // wx.redirectTo({
+    //   url: "/pages/operaResult/operaResult?operaType=confirm_house_success",
+    // })
+  },
+
+  bindTheHouse:function(){
+    if (!this.data.bookid) {
+      //不存在的房源
+      console.log('房源不存在')
+    }
+    let userId = util.getMyUserId()
+    request.requestToConfirmHouse(this.data.bookid, this.data.phoneNum, userId, res => {
+
+      if (res.data.msg === "0") {
+        //绑定成功，跳转页面
+        wx.redirectTo({
+          url: "/pages/operaResult/operaResult?operaType=confirm_house_success",
+        })
+      }
+    })
+  },
+  bindinputPhoneNum:function(e){
+    let phoneNum = e.detail.value
+    this.setData({
+      phoneNum: phoneNum
     })
   },
 
+  bindinputMessage: function (e) {
+    let messageCode = e.detail.value
+    this.setData({
+      messageCode: messageCode
+    })
+  },
+
+
+  getMessageCode:function(){
+    console.log('getMessageCode')
+    console.log(this.data.phoneNum)
+    request.requestGetMessageCode(this.data.phoneNum,res=>{
+      console.log(res.data)
+    })
+
+    
+
+    // requestGetMessageCode: requestGetMessageCode,
+    //   requestCheckMessageCode: requestCheckMessageCode
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
+    this.setData({
+      bookid: options.bookid
+    })
   },
 
   /**

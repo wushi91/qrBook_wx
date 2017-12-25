@@ -1,4 +1,7 @@
-// pages/myroom/myroom.js
+
+const request = require('../../utils/request.js')
+const util = require('../../utils/util.js')
+
 Page({
 
   /**
@@ -6,6 +9,7 @@ Page({
    */
   data: {
     isBlankRoom:true,
+    myBindRoom:{fangdongPhoneNum:'sssss',},
   },
 
 
@@ -21,7 +25,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('onLoad')
+    let userId = util.getMyUserId()
+    request.requestGetMyBindRoominfo(userId,res=>{
+      console.log(res.data.list)
+      if(res.data.msg==='0'){
+        this.setData({
+          isBlankRoom:false,
+          myBindRoom: res.data.list
+        })
+
+      }else{
+        this.setData({
+          isBlankRoom: true
+        })
+      }
+    })
+
+    
+    
+
   },
 
   /**

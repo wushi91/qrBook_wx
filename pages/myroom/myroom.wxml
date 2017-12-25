@@ -6,42 +6,42 @@
     <button bindtap="toSearchRoomPage">添加我的租房</button>
   </view>
   <view wx:else class='has-room'>
-    <text class='room-name'>都市名园D栋26G</text>
+    <text class='room-name'>{{myBindRoom.address}}</text>
     <view class='has-room-item'>
       <text>房东手机号</text>
-      <text>135 3848 3802</text>
+      <text>{{myBindRoom.phone_num }}</text>
     </view>
     <view class='line'></view>
     <view class='has-room-item'>
       <text>起租日期</text>
-      <text>2017/09/20</text>
+      <text>{{myBindRoom.start_time }}</text>
     </view>
     <view class='has-room-item'>
       <text>截止日期</text>
-      <text>2017/10/19</text>
+      <text>{{myBindRoom.end_time }}</text>
     </view>
     <view class='has-room-item'>
       <text>租期</text>
-      <text>1月/付</text>
+      <text>{{myBindRoom.rent_month }}个月</text>
     </view>
     <view class='line'></view>
     <view class='has-room-item'>
       <text>交租方式</text>
-      <text>1月/付</text>
+      <text>{{myBindRoom.pay_type }}月/付</text>
     </view>
     <view class='has-room-item'>
       <text>交租日期</text>
-      <text>20号</text>
+      <text>{{myBindRoom.pay_time }}号</text>
     </view>
     
     <view class='line'></view>
     <view class='has-room-item'>
       <text>押金</text>
-      <text>5000元</text>
+      <text>{{myBindRoom.security_deposit }}元</text>
     </view>
     <view class='has-room-item'>
       <text>每月租金</text>
-      <text>5000元</text>
+      <text>{{myBindRoom.rent }}元</text>
     </view>
     
   </view>

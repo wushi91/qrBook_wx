@@ -1,4 +1,8 @@
 // pages/mybill/mybill.js
+
+const request = require('../../utils/request.js')
+const util = require('../../utils/util.js')
+
 Page({
 
   /**
@@ -30,7 +34,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    //待支付的账单列表
+    let userId = util.getMyUserId()
+    request.requestGetUnpayBillList(userId, res => {
+      console.log(res)
+      if (res.data.msg === '0') {
+        // noPayOrederList =[]
+      }
+    })
   },
 
   /**

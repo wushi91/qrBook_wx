@@ -1,26 +1,26 @@
 <!--pages/searchRoom/searchRoom.wxml-->
 <view class="container">
-  <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+  <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
     <view class='choose-city'>
-    <text>选择房源所在城市</text>
+    <text>{{region[0]}}，{{region[1]}}</text>
     </view>
 
   </picker>
 
   <view class='address-wrapper'>
-  <textarea placeholder-style="color:rgba(178,178,178,1);" maxlength='70' placeholder="输入小区、房号等信息" name="textarea"/>
+  <textarea bindinput="bindHouseNameInput" placeholder-style="color:rgba(178,178,178,1);" maxlength='70' placeholder="输入小区、房号等信息" value="{{inputHouseName}}"/>
   </view>
   
   <view class='item-guess-house-wrapper'>
-    <view class='item-guess-house' wx:for="{{houseGuessList}}" wx:key>
-      <text>{{item.name}}</text>
-      <view class='line' wx:if="{{index<houseGuessList.length-1}}">
+    <view class='item-guess-house' wx:for="{{houseSearchList}}" wx:key data-bookid="{{item.id}}" data-address="{{item.address}}" bindtap='chooseTheHouse'>
+      <text>{{item.address}}</text>
+      <view class='line' wx:if="{{index<houseSearchList.length-1}}">
       </view>
     </view>
   </view>
 
   <view class='btn-wrapper'>
-    <button bindtap="toConfirmTheHouse">下一步</button>
+    <button class="button-disabled" bindtap="toConfirmTheHouse" disabled='{{selectBookId?false:true}}'>下一步</button>
   </view>
   
 </view>

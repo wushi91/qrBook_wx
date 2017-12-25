@@ -2,7 +2,7 @@
 <view class="container">
 
   <view class='user-info-wrapper'>
-    <image class='header-image' src="{{headerimagesrc}}" bindtap="wxLogin"></image>
+    <image class='header-image' src="{{headerimagesrc}}" bindtap="toMyUserLogin"></image>
     <text class='username' bindtap="wxLogin">{{ username }}</text>
   </view>
 

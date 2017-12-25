@@ -33,3 +33,8 @@ button:active{
   background-color:rgba(41,123,206,1);
   color:rgba(255,255,255,1);
 }
+
+utton[disabled][type="default"], wx-button[disabled]:not([type]){
+  background-color: rgb(164, 201, 239);
+  color:rgba(255,255,255,1);
+}

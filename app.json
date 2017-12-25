@@ -1,22 +1,19 @@
 {
   "pages": [
-
     "pages/myroom/myroom",
     "pages/myroom/searchRoom/searchRoom",
-    "pages/myinfo/myinfo",
-
-    
-"pages/mybill/mybill",
-    "pages/mybill/billdetail/billdetail",
-
-    
     "pages/myroom/confirmRoom/confirmRoom",
     
     
+    
+    
+    "pages/myinfo/myinfo",
+    
+    "pages/mybill/mybill",
+    "pages/mybill/billdetail/billdetail",
+    
 
     "pages/operaResult/operaResult",
-
-
     "pages/index/index",
     "pages/logs/logs"
   ],

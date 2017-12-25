@@ -1,28 +1,71 @@
-// pages/searchRoom/searchRoom.js
+const request = require('../../../utils/request.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    region: ['广东省', '深圳市', '海珠区'],
-    houseGuessList: [{ name: 'B101' }, { name: 'B201' }, { name: 'B301' }, { name: 'B401' }],
-    i:0,
+    region: ['广东省', '深圳市', '罗湖区'],//默认值
+    inputHouseName:'',
+    selectBookId:'',
+    houseSearchList: [],//{ name: 'B101' }, { name: 'D101' }, { name: 'D102' }, { name: 'B401' }
   },
 
+  bindRegionChange:function(e){
+    this.setData({
+      region: e.detail.value
+    })
+  },
+
+  bindHouseNameInput: function (e) {
+    if (e.detail.value){
+      //输入为空的时候不做搜索
+      this.searchTheHouse(e.detail.value)
+    }
+    
+    this.setData({
+      selectBookId:'',
+      inputHouseName: e.detail.value
+    })
+  },
+
+  chooseTheHouse: function (e){
+    let bookid = e.currentTarget.dataset.bookid
+    let address = e.currentTarget.dataset.address
+  
+    this.setData({
+      inputHouseName: bookid,
+      selectBookId: bookid,
+      inputHouseName: address,
+      houseSearchList:[]
+    })
+  },
+
+  //搜索房源
+  searchTheHouse:function(address){
+    let province = this.data.region[0]
+    let city = this.data.region[1]
+    // address ? "":address = this.data.inputHouseName
+    request.requestToSearchHouse(province, city, address, res => {
+
+      if (res.data.msg === '0') {
+        //有数据
+        this.setData({
+          houseSearchList: res.data.list
+        })
+      } else {
+        this.setData({
+          houseSearchList: []
+        })
+      }
+    })
+  },
 
   toConfirmTheHouse: function () {
-    if(this.data.i===0){
-      this.roomHasNoTips()
-      this.setData({
-        i: 1
-      })
-    }
-    else{
-      wx.redirectTo({
-        url: '/pages/myroom/confirmRoom/confirmRoom'
-      })
-    }
+    wx.redirectTo({
+      url: '/pages/myroom/confirmRoom/confirmRoom?bookid=' + this.data.selectBookId
+    })
     
     
   },

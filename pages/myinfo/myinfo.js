@@ -1,4 +1,6 @@
-// pages/myinfo/myinfo.js
+const util = require('../../utils/util.js')
+const request = require('../../utils/request.js')
+
 
 //获取应用实例
 const app = getApp()
@@ -13,41 +15,52 @@ Page({
     headerimagesrc:'/images/unlogin-header-image.png',
   },
 
-  wxLogin:function(){
-    console.log('ssss')
-
-    // wx.openSetting({
-    //   success: (res) => {
-        
-    //       res.authSetting = {
-    //        "scope.userInfo": false,
-    //        "scope.userLocation": true
-    //       }
-         
-    //   }
-    // })
-    // wx.login({
-    //   success:res=>{
-    //     console.log(res)
-    //   }
-    // })
-
-    wx.getUserInfo({
-      success: res => {
-        app.globalData.userInfo = res.userInfo
-        this.setData({
-          username: res.userInfo.nickName,
-          headerimagesrc: res.userInfo.avatarUrl,
-        })
-      }
-    })
+  toMyUserLogin:function(){
+    if (!util.getMyUserId()){
+      //请求权限，获取微信用户信息
+      wx.getUserInfo({
+        success: res => {
+          let userInfo = res.userInfo
+          wx.login({
+            success: res => {
+              let code = res.code
+              request.requestLoginTogetMyUserId(code, userInfo, res => {
+                console.log(res.data.user_id)
+                util.saveMyUserId(res.data.user_id)
+                this.setData({
+                  username: userInfo.nickName,
+                  headerimagesrc: userInfo.avatarUrl,
+                })
+              })
+            }
+          })
+        }
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
+    
+    if (util.getMyUserId()){
+      console.log('已经登录')
+      //如果已经登录，获取微信用户信息
+      wx.getUserInfo({
+        success: res => {
+          console.log(res.userInfo)
+          this.setData({
+            username: res.userInfo.nickName,
+            headerimagesrc: res.userInfo.avatarUrl,
+          })
+        }
+      })
+    }else{
+      console.log('未登录')
+    }
+
   },
 
   /**

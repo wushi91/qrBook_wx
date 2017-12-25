@@ -2,11 +2,11 @@
 <view class="container">
 
   <view class='input-wrapper'>
-    <input class='phone-num' placeholder="请输入你与房东签约时的手机号" placeholder-style="color:rgba(178,178,178,1);" />
+    <input class='phone-num' type='number' bindinput='bindinputPhoneNum' maxlength='11' placeholder="请输入你与房东签约时的手机号" placeholder-style="color:rgba(178,178,178,1);" />
   </view>
   <view class='input-wrapper'>
-    <input class='message-code' placeholder="请输入6位验证码"      placeholder-style="color:rgba(178,178,178,1);"/>
-    <text class='get-message-code'>获取验证码</text>
+    <input class='message-code' type='number' bindinput='bindinputMessage' maxlength='6' placeholder="请输入6位验证码"      placeholder-style="color:rgba(178,178,178,1);"/>
+    <text class='get-message-code' bindtap='getMessageCode'>获取验证码</text>
   </view>
 
   <view class='btn-wrapper'>
