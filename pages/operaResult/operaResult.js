@@ -1,4 +1,6 @@
-// pages/operaResult/operaResult.js
+
+const app = getApp()
+
 Page({
 
   /**
@@ -25,6 +27,8 @@ Page({
   },
 
   backToIndexPage:function(){
+    //首页的数据要刷新
+    app.updateMyRoomPage()
     wx.navigateBack({
       delta: 1
     })

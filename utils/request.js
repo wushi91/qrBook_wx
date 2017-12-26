@@ -7,15 +7,15 @@ const to_search_house_url = host +'/rentBook/tenant/findAddress.do'
 //获取手机验证码
 const get_message_code_url = host + '/rentBook/landlord/getResetCode.do'
 //验证手机验证码
-const check_message_code_url = host + '/rentBook/landlord/checkRegisterCode.do'
+const check_message_code_url = host + '/rentBook/landlord/checkBindCode.do'
 //绑定房源
 const to_confirm_house_url = host +'/rentBook/tenant/userBanding.do'
 //待支付的账单列表
 const get_unpay_billlist_url = host + '/rentBook/tenant/getUserPayment.do'
 //已支付的账单列表
-const get_haspay_billlist_url = host + '--'
+const get_haspay_billlist_url = host + '/rentBook/tenant/TenantPaid.do'
 //待支付的账单详细
-const get_unpay_billdetail_url = host + '--'
+const get_unpay_billdetail_url = host + '/rentBook/tenant/getRentPaymentInfo.do'
 //已支付的账单详细
 const get_haspay_billdetail_url = host + '--'
 //获取我的绑定房源

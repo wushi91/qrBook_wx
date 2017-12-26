@@ -27,18 +27,30 @@
   margin-top: 30rpx;
 }
 
-.user-item-wrapper .user-item{
+.user-item-wrapper button.user-item{
   background-color: white;
+  width: 100%;
+  text-align: left;
+  padding: 0;
+  border: none;
+  border-radius: 0rpx;
+}
+
+
+.user-item-wrapper button.user-item::after{
+  border: none;
 }
 
 .user-item .user-item-title{
+  
   display: inline-block;
-margin-left: 30rpx;
-margin-top: 20rpx;
+  margin-left: 30rpx;
+  margin-top: 20rpx;
 margin-bottom: 20rpx;
 font-size:34rpx;
 color:rgba(0,0,0,1);
 line-height:48rpx;
+
 }
 
 .user-item .user-item-icon{

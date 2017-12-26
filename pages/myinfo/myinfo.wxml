@@ -6,11 +6,11 @@
     <text class='username' bindtap="wxLogin">{{ username }}</text>
   </view>
 
-  <view class='user-item-wrapper'>
-    <view class='user-item'>
-    <text class='user-item-title'>意见反馈</text>
-    <image class='user-item-icon' src="/images/can-into-right.png"></image>
-  </view>
+  <view class='user-item-wrapper' >
+    <button class='user-item' open-type='contact'>
+      <text class='user-item-title'>意见反馈</text>
+      <image class='user-item-icon' src="/images/can-into-right.png"></image>
+    </button>
 
   </view>
 

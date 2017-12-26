@@ -2,6 +2,7 @@
 
 const request = require('../../utils/request.js')
 const util = require('../../utils/util.js')
+const test = require('../../utils/test.js')
 
 Page({
 
@@ -11,8 +12,8 @@ Page({
   data: {
     isBlankBill:false,
     payStatus:'nopay',
-    noPayOrederList: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
-    hasPayOrederList: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+    noPayOrederList: [],
+    hasPayOrederList: []
   },
 
 
@@ -22,26 +23,63 @@ Page({
     })
   },
 
-  toBillDeatil:function(){
-    console.log('sbsbsb')
+  toBillDeatil:function(e){
     var payStatus = this.data.payStatus
+    let billid = e.currentTarget.dataset.billid
+    console.log('billid = ' + billid)
     wx.navigateTo({
       url: "/pages/mybill/billdetail/billdetail?payStatus=" + payStatus
     })
+  },
+
+  toShowBlank(){
+      this.setData({
+        isBlankBill: this.data.noPayOrederList.length === 0 && this.data.hasPayOrederList.length === 0
+      })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //待支付的账单列表
+    // util.test()
+    test.test()
     let userId = util.getMyUserId()
+    console.log('获取绑定的房源 userId = ' + userId)
+    if (!userId) {
+      return
+    }
+
+    //待支付的账单列表
     request.requestGetUnpayBillList(userId, res => {
-      console.log(res)
+      console.log(res.data)
       if (res.data.msg === '0') {
-        // noPayOrederList =[]
+        console.log('sbsbs')
+        this.setData({
+          noPayOrederList: res.data.list
+        })
+      }else{
+        this.setData({
+          noPayOrederList: []
+        })
       }
+      this.toShowBlank()
     })
+
+    // request.requestGetHaspayBillList(userId, res => {
+    //   console.log(res.data)
+
+    //   if (res.data.msg === '0') {
+    //     this.setData({
+    //       hasPayOrederList: res.data.list
+    //     })
+    //   } else {
+    //     this.setData({
+    //       hasPayOrederList: []//res.data.list
+    //     })
+    //   }
+    //   this.toShowBlank()
+    // })
   },
 
   /**

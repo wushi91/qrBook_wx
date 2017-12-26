@@ -48,7 +48,7 @@ Page({
     let city = this.data.region[1]
     // address ? "":address = this.data.inputHouseName
     request.requestToSearchHouse(province, city, address, res => {
-
+      console.log(res.data)
       if (res.data.msg === '0') {
         //有数据
         this.setData({

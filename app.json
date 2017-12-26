@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/mybill/mybill",
     "pages/myroom/myroom",
     "pages/myroom/searchRoom/searchRoom",
     "pages/myroom/confirmRoom/confirmRoom",
@@ -9,7 +10,7 @@
     
     "pages/myinfo/myinfo",
     
-    "pages/mybill/mybill",
+    
     "pages/mybill/billdetail/billdetail",
     
 

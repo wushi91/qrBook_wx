@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    phoneNum:'',
-    messageCode:'',
+    phoneNum:'13822542317',
+    messageCode:'647161',
     bookid:''
   },
 
