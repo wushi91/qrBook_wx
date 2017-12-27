@@ -2,14 +2,14 @@
 <view class="container">
 <view class='bill-deatil-topay' wx:if="{{payStatus==='nopay'}}">
   <view class='bill-info'>
-    <text class='room-name'>都市名园D栋26G</text>
+    <text class='room-name'>{{billBean.address}}</text>
     <view class='bill-info-item bill-info-title-item'>
       <text>租金</text>
-      <text class='bill-money'>5000</text>
+      <text class='bill-money'>{{billBean.balance}}</text>
     </view>
     <view class='bill-info-item'>
       <text>账单期</text>
-      <text>2017/11/20-2017/12/19</text>
+      <text>{{billBean.start_time}}-{{billBean.end_time}}</text>
     </view>
 
     <view class='bill-info-item'>
@@ -25,37 +25,37 @@
   <view class='bill-deatil-haspay' wx:else>
     
     <view class='room-name-wrapper'>
-    <text class='room-name'>都市名园D栋26G</text>
+    <text class='room-name'>{{billBean.address}}</text>
     </view>
     <view class='bill-info-item-wrapper'>
     <view class='bill-info-haspay-item'>
       <text>支付金额</text>
-      <text class='bill-money'>5000</text>
+      <text class='bill-money'>{{billBean.balance}}</text>
     </view>
     <view class='line'></view>
     <view class='bill-info-haspay-item'>
       <text>当前状态</text>
-      <text>支付成功</text>
+      <text>{{billBean.status}}</text>
     </view>
 
     <view class='bill-info-haspay-item'>
       <text>租金时间</text>
-      <text>2017/10/20-2017/11/19</text>
+      <text>{{billBean.start_time}}-{{billBean.end_time}}</text>
     </view>
 
     <view class='bill-info-haspay-item'>
       <text>支付时间</text>
-      <text>2017/11/19 20:40:56</text>
+      <text>{{billBean.trading_time}}</text>
     </view>
 
     <view class='bill-info-haspay-item'>
       <text>支付方式</text>
-      <text>招商银行储蓄卡</text>
+      <text>{{billBean.paytype}}</text>
     </view>
 
     <view class='bill-info-haspay-item'>
       <text>交易单号</text>
-      <text>2017111987340893923749</text>
+      <text>{{billBean.orderid}}</text>
     </view></view>
   </view>
 </view>

@@ -18,26 +18,52 @@ Page({
 
   toSearchRoomPage:function(){
 
-    
+    let userId = util.getMyUserId()
+    if (!userId) {
+      //未登录
+      this.loginTips()
+      return
+    }
     wx.navigateTo({
       url: '../myroom/searchRoom/searchRoom'
     })
   },
 
-  toGetMyBindRoom:function(){
 
-   
+  loginTips: function () {
+    wx.showModal({
+      title: '',
+      content: '请先登录',
+      showCancel: false,
+      confirmText: '确定',
+      confirmColor: '#2E8AE6',
+      success: function (res) {
+        if (res.confirm) {
+          wx.switchTab({
+            url: '../myinfo/myinfo',
+          })
+        } else if (res.cancel) {
+          // console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  toGetMyBindRoom:function(){
     let userId = util.getMyUserId()
-    console.log('获取绑定的房源 userId = ' + userId)
     if (!userId){
+      //未登录
       return
     }
     request.requestGetMyBindRoominfo(userId, res => {
-      console.log(res.data)
+      
       if (res.data.msg === '0') {
+        let myBindRoom = res.data.list
+        myBindRoom.end_time = util.getFormateDate(myBindRoom.end_time)
+        myBindRoom.start_time = util.getFormateDate(myBindRoom.start_time) 
         this.setData({
           isBlankRoom: false,
-          myBindRoom: res.data.list
+          myBindRoom: myBindRoom
         })
 
       } else {
@@ -62,7 +88,7 @@ Page({
     //   duration: 2000
     // })
     this.toGetMyBindRoom()
-    app.updateMyRoomPage = this.toGetMyBindRoom
+    app.updateMyRoomPage = this.toGetMyBindRoom//监听
     
 
   },

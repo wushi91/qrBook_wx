@@ -1,8 +1,10 @@
 // pages/mybill/mybill.js
 
+const app = getApp()
+
 const request = require('../../utils/request.js')
 const util = require('../../utils/util.js')
-const test = require('../../utils/test.js')
+// const test = require('../../utils/test.js')
 
 Page({
 
@@ -26,39 +28,35 @@ Page({
   toBillDeatil:function(e){
     var payStatus = this.data.payStatus
     let billid = e.currentTarget.dataset.billid
-    console.log('billid = ' + billid)
     wx.navigateTo({
-      url: "/pages/mybill/billdetail/billdetail?payStatus=" + payStatus
+      url: "/pages/mybill/billdetail/billdetail?payStatus=" + payStatus + "&billid=" + billid
     })
   },
 
   toShowBlank(){
-      this.setData({
-        isBlankBill: this.data.noPayOrederList.length === 0 && this.data.hasPayOrederList.length === 0
-      })
+    this.setData({
+      isBlankBill: this.data.noPayOrederList.length === 0 && this.data.hasPayOrederList.length === 0
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    // util.test()
-    test.test()
+  toGetAllBillList: function (){
     let userId = util.getMyUserId()
-    console.log('获取绑定的房源 userId = ' + userId)
-    if (!userId) {
-      return
-    }
-
     //待支付的账单列表
     request.requestGetUnpayBillList(userId, res => {
-      console.log(res.data)
+      // console.log(res.data)
       if (res.data.msg === '0') {
-        console.log('sbsbs')
+        let noPayOrederList = res.data.list
+
+        for (let i = 0; i < noPayOrederList.length; i++) {
+          let item = noPayOrederList[i]
+          item.end_time = util.getFormateDate(item.end_time)
+          item.start_time = util.getFormateDate(item.start_time) 
+        }
+       
         this.setData({
-          noPayOrederList: res.data.list
+          noPayOrederList: noPayOrederList
         })
-      }else{
+      } else {
         this.setData({
           noPayOrederList: []
         })
@@ -66,20 +64,44 @@ Page({
       this.toShowBlank()
     })
 
-    // request.requestGetHaspayBillList(userId, res => {
-    //   console.log(res.data)
+    request.requestGetHaspayBillList(userId, res => {
+      // console.log(res.data)
 
-    //   if (res.data.msg === '0') {
-    //     this.setData({
-    //       hasPayOrederList: res.data.list
-    //     })
-    //   } else {
-    //     this.setData({
-    //       hasPayOrederList: []//res.data.list
-    //     })
-    //   }
-    //   this.toShowBlank()
-    // })
+      if (res.data.msg === '0') {
+        let hasPayOrederList = res.data.list
+        for (let i = 0; i < hasPayOrederList.length; i++) {
+          let item = hasPayOrederList[i]
+          item.end_time = util.getFormateDate(item.end_time)
+          item.start_time = util.getFormateDate(item.start_time)
+        }
+
+        this.setData({
+          hasPayOrederList: hasPayOrederList
+        })
+      } else {
+        this.setData({
+          hasPayOrederList: []//res.data.list
+        })
+      }
+      this.toShowBlank()
+    })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    // util.test()
+    // test.test()
+    app.updateMyBillPage = this.toGetAllBillList
+    let userId = util.getMyUserId()
+    if (!userId) {
+      //还没有登录
+      this.toShowBlank()
+      return
+    }
+
+    this.toGetAllBillList()
+    
   },
 
   /**

@@ -24,6 +24,7 @@ Page({
           wx.login({
             success: res => {
               let code = res.code
+              //获取平台的userId
               request.requestLoginTogetMyUserId(code, userInfo, res => {
                 console.log(res.data.user_id)
                 util.saveMyUserId(res.data.user_id)
@@ -31,6 +32,8 @@ Page({
                   username: userInfo.nickName,
                   headerimagesrc: userInfo.avatarUrl,
                 })
+                app.updateMyRoomPage()
+                app.updateMyBillPage()
               })
             }
           })
@@ -46,7 +49,7 @@ Page({
 
     
     if (util.getMyUserId()){
-      console.log('已经登录')
+      // 已经登录
       //如果已经登录，获取微信用户信息
       wx.getUserInfo({
         success: res => {
@@ -58,7 +61,7 @@ Page({
         }
       })
     }else{
-      console.log('未登录')
+      // 未登录
     }
 
   },

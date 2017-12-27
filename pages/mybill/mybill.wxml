@@ -29,12 +29,12 @@
     </view>
     
     <view class='list-wrapper' wx:else>
-      <view class='bill-item' wx:for="{{hasPayOrederList}}" wx:key bindtap='toBillDeatil'>
+      <view class='bill-item' wx:for="{{hasPayOrederList}}" data-billid="{{item.pay_id}}"  wx:key bindtap='toBillDeatil'>
       <view class='bill-item-title-wrapper' >
-        <text class='bill-item-title'>2017年12月房租</text>
-        <text class='bill-item-time'>2017/11/20-2017/12/19</text>
+        <text class='bill-item-title'>{{item.title}}</text>
+        <text class='bill-item-time'>{{item.start_time}}-{{item.end_time}}</text>
       </view>
-      <text class='bill-item-money has-pay'>5000</text>
+      <text class='bill-item-money has-pay'>{{item.balance}}</text>
       </view>
     </view>
 

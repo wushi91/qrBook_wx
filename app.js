@@ -36,7 +36,10 @@ App({
   globalData: {
     userInfo: null
   },
-  updateMyRoomPage:{
-    
-  }
+  updateMyRoomPage:function(){
+
+  },
+  updateMyBillPage: function () {
+    console.log('updateMyBillPage')
+  },
 })

@@ -1,4 +1,9 @@
 // pages/mybill/billdetail/billdetail.js
+
+const request = require('../../../utils/request.js')
+const util = require('../../../utils/util.js')
+
+
 Page({
 
   /**
@@ -10,6 +15,9 @@ Page({
       haspay: '账单详情',
     },
     payStatus: 'haspay',
+    billid:'',
+    billBean:{},
+
   },
 
   payTheRenter:function(){
@@ -25,13 +33,57 @@ Page({
       }
     })
   },
+
+  toGetTheNoPayDeatil:function(billid){
+    if(billid){
+      let userId = util.getMyUserId()
+      request.requestGetUnpayBillDetail(userId,billid,res=>{
+        // console.log(res.data)
+        let billBean = res.data.list
+        billBean.end_time = util.getFormateDate(billBean.end_time)
+        billBean.start_time = util.getFormateDate(billBean.start_time) 
+        if (res.data.msg==='0'){
+          this.setData({
+            billBean: billBean,
+          })
+        }
+        
+      })
+    }
+  },
+
+  toGetTheHasPayDeatil:function(billid){
+    if (billid) {
+      let userId = util.getMyUserId()
+      request.requestGetHaspayBillDetail(userId, billid, res => {
+        // console.log(res.data)
+
+        if (res.data.msg === '0') {
+          let billBean = res.data.list
+          billBean.end_time = util.getFormateDate(billBean.end_time)
+          billBean.start_time = util.getFormateDate(billBean.start_time) 
+          billBean.trading_time = util.formatTime(new Date(billBean.trading_time))
+          this.setData({
+            billBean: billBean,
+          })
+        }
+
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
-      payStatus: options.payStatus
+      payStatus: options.payStatus,
+      billid: options.billid
     })
+    if (options.payStatus ==='nopay'){
+      this.toGetTheNoPayDeatil(options.billid)
+    }else{
+      this.toGetTheHasPayDeatil(options.billid)
+    }
     wx.setNavigationBarTitle({
       title: this.data.payStatuss[this.data.payStatus]
     })

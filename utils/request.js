@@ -17,7 +17,7 @@ const get_haspay_billlist_url = host + '/rentBook/tenant/TenantPaid.do'
 //待支付的账单详细
 const get_unpay_billdetail_url = host + '/rentBook/tenant/getRentPaymentInfo.do'
 //已支付的账单详细
-const get_haspay_billdetail_url = host + '--'
+const get_haspay_billdetail_url = host + '/rentBook/tenant/TenantPaidDetail.do'
 //获取我的绑定房源
 const get_mybind_room_url = host + '/rentBook/tenant/showBind.do'
 
@@ -106,7 +106,7 @@ const requestGetHaspayBillList = function (user_id, success) {
   })
 }
 //待支付的账单详细
-const requestGetUnpayBillDetail = function (billid,user_id, success) {
+const requestGetUnpayBillDetail = function (user_id,billid, success) {
   wx.request({
     url: get_unpay_billdetail_url,
     data: {
@@ -117,11 +117,11 @@ const requestGetUnpayBillDetail = function (billid,user_id, success) {
   })
 }
 //已支付的账单详细
-const requestGetHaspayBillDetail = function (billid, user_id, success) {
+const requestGetHaspayBillDetail = function (user_id,billid, success) {
   wx.request({
     url: get_haspay_billdetail_url,
     data: {
-      id: billid,
+      pay_id: billid,
       user_id: user_id
     },
     success: success,

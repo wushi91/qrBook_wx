@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/mybill/mybill",
     "pages/myroom/myroom",
+    "pages/mybill/mybill",
+    
     "pages/myroom/searchRoom/searchRoom",
     "pages/myroom/confirmRoom/confirmRoom",
     

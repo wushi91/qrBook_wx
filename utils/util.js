@@ -106,38 +106,44 @@ const saveMyUserId = function (user_id) {
 // }
 
 
-const test=function(){
-  console.log(Date.now())
-  let d = new Date()
-  d.setDate(1)
-  console.log(formatTime(d))
-  console.log("month = " + systemMonth)
-  let systemMonth = d.getMonth()
-  d.setDate(d.getDate() -1)
-  d.setMonth(systemMonth+1)
+// const test=function(){
+//   console.log(Date.now())
+//   let d = new Date()
+//   d.setDate(1)
+//   console.log(formatTime(d))
+//   console.log("month = " + systemMonth)
+//   let systemMonth = d.getMonth()
+//   d.setDate(d.getDate() -1)
+//   d.setMonth(systemMonth+1)
 
-  console.log(formatTime(d))
+//   console.log(formatTime(d))
 
-  console.log(getDaysInOneMonth(2012,2))
+//   console.log(getDaysInOneMonth(2012,2))
+// }
+
+// function getDaysInOneMonth(year, month) {
+//   month = parseInt(month, 10);
+//   var d = new Date(year, month, 0);  //这个是都可以兼容的
+//   var date = new Date(year + "/" + month + "/0")   //IE浏览器可以获取天数，谷歌浏览器会返回NaN
+//   return d.getDate();
+// }
+
+// const getTheMonth=function(month){
+
+// }
+
+
+const getFormateDate=function (time) {
+  let date = new Date(time)
+  return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
 }
-
-function getDaysInOneMonth(year, month) {
-  month = parseInt(month, 10);
-  var d = new Date(year, month, 0);  //这个是都可以兼容的
-  var date = new Date(year + "/" + month + "/0")   //IE浏览器可以获取天数，谷歌浏览器会返回NaN
-  return d.getDate();
-}
-
-const getTheMonth=function(month){
-
-}
-
 
 module.exports = {
   formatTime: formatTime,
   getMyUserId: getMyUserId,
   saveMyUserId: saveMyUserId,
-  test: test
+  getFormateDate: getFormateDate
+  // test: test
   // hasUserInfoAuth: hasUserInfoAuth,
   // loginTogetMyUserId: loginTogetMyUserId,
   // getWxUserInfo: getWxUserInfo,
