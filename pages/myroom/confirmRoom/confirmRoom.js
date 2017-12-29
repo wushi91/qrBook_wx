@@ -1,5 +1,6 @@
 const request = require('../../../utils/request.js')
 const util = require('../../../utils/util.js')
+const Verification = require('../../../utils/Verification.js')
 
 Page({
 
@@ -9,8 +10,35 @@ Page({
   data: {
     phoneNum:'',
     messageCode:'',
-    bookid:''
+    bookid:'',
+    houseid: '',
+
+
+    seconds: 60,
+    daoji_timer: 60,
+    daojishi: '获取验证码',
+    canClickCode:true
   },
+
+  waitToGetRegisteCode: function () {
+    this.setData({
+      daojishi :'重新发送(' + this.data.daoji_timer + ')'
+    })
+    if (this.data.daoji_timer > 0) {
+      this.setData({
+        daoji_timer: this.data.daoji_timer - 1
+      })
+      setTimeout(this.waitToGetRegisteCode, 1000)
+    } else {
+      this.setData({
+        daojishi: '重新发送',
+        canClickCode: true,
+        daoji_timer : this.data.seconds
+      })
+      
+    }
+  },
+
 
   chooseTheHouse:function(){
     //首先验证短信码
@@ -20,11 +48,23 @@ Page({
       if (res.data.msg==="0"){
         //之后要进行绑定房源
         this.bindTheHouse()
+      }else{
+        
       }
     })
     // wx.redirectTo({
     //   url: "/pages/operaResult/operaResult?operaType=confirm_house_success",
     // })
+  },
+
+  roomHasNoTips: function () {
+    wx.showModal({
+      title: '该手机号与房源不匹配，请联系房东修改租客手机号',
+      content: '',
+      showCancel: false,
+      confirmText: '知道了',
+      confirmColor: '#2E8AE6',
+    })
   },
 
   bindTheHouse:function(){
@@ -40,6 +80,9 @@ Page({
         wx.redirectTo({
           url: "/pages/operaResult/operaResult?operaType=confirm_house_success",
         })
+      }else{
+        //对话框提示
+        this.roomHasNoTips()
       }
     })
   },
@@ -61,8 +104,34 @@ Page({
   getMessageCode:function(){
     console.log('getMessageCode')
     console.log(this.data.phoneNum)
-    request.requestGetMessageCode(this.data.phoneNum,res=>{
+
+    
+    if (!Verification.isPhoneNum(this.data.phoneNum)){
+      wx.showModal({
+        title: '请输入正确的手机号',
+        content: '',
+        showCancel: false,
+        confirmText: '确定',
+        confirmColor: '#2E8AE6',
+      })
+      return 
+    }
+
+
+    this.setData({
+      canClickCode: false
+    })
+    this.waitToGetRegisteCode()
+    request.requestGetMessageCode(this.data.phoneNum, this.data.houseid,res=>{
       console.log(res.data)
+      if (res.data.msg==='0'){
+
+      }else{
+        //对话框提示
+        this.roomHasNoTips()
+
+      }
+      
     })
 
     
@@ -75,9 +144,13 @@ Page({
    */
   onLoad: function (options) {
     
+    console.log(options)
     this.setData({
-      bookid: options.bookid
+      bookid: options.bookid,
+      houseid: options.houseid
     })
+
+    // this.roomHasNoTips()
   },
 
   /**

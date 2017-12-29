@@ -12,7 +12,7 @@
   </view>
   
   <view class='item-guess-house-wrapper'>
-    <view class='item-guess-house' wx:for="{{houseSearchList}}" wx:key data-bookid="{{item.id}}" data-address="{{item.address}}" bindtap='chooseTheHouse'>
+    <view class='item-guess-house' wx:for="{{houseSearchList}}" wx:key data-bookid="{{item.id}}" data-houseid="{{item.hid}}" data-address="{{item.address}}" bindtap='chooseTheHouse'>
       <text>{{item.address}}</text>
       <view class='line' wx:if="{{index<houseSearchList.length-1}}">
       </view>

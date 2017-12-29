@@ -43,7 +43,7 @@ Page({
     let userId = util.getMyUserId()
     //待支付的账单列表
     request.requestGetUnpayBillList(userId, res => {
-      // console.log(res.data)
+      console.log(res.data)
       if (res.data.msg === '0') {
         let noPayOrederList = res.data.list
 

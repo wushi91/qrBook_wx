@@ -3,8 +3,6 @@ const app = getApp()
 const request = require('../../utils/request.js')
 const util = require('../../utils/util.js')
 
-
-
 Page({
 
   /**

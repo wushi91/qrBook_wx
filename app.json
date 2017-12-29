@@ -1,10 +1,13 @@
 {
   "pages": [
+    
     "pages/myroom/myroom",
     "pages/mybill/mybill",
     
-    "pages/myroom/searchRoom/searchRoom",
     "pages/myroom/confirmRoom/confirmRoom",
+    
+    "pages/myroom/searchRoom/searchRoom",
+    
     
     
     

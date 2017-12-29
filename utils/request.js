@@ -1,11 +1,12 @@
-const host = 'http://192.168.2.220:8080'
+// const host = 'http://192.168.2.220:8080'
+const host = 'https://www.0755qr.com'
 
 //登录
 const login_get_user_id_url = host+'/rentBook/user/authorise.do'
 //搜索房源 该市所有房源下
 const to_search_house_url = host +'/rentBook/tenant/findAddress.do'
 //获取手机验证码
-const get_message_code_url = host + '/rentBook/landlord/getResetCode.do'
+const get_message_code_url = host + '/rentBook/landlord/getBindCode.do'
 //验证手机验证码
 const check_message_code_url = host + '/rentBook/landlord/checkBindCode.do'
 //绑定房源
@@ -20,6 +21,8 @@ const get_unpay_billdetail_url = host + '/rentBook/tenant/getRentPaymentInfo.do'
 const get_haspay_billdetail_url = host + '/rentBook/tenant/TenantPaidDetail.do'
 //获取我的绑定房源
 const get_mybind_room_url = host + '/rentBook/tenant/showBind.do'
+//获取微信支付的参数
+const get_wxdata_topay_url = host +'/rentBook/pay/getWxPayParameters.do'
 
 
 //登录
@@ -48,10 +51,11 @@ const requestToSearchHouse = function (province, city, address,success) {
 }
 
 //获取手机验证码
-const requestGetMessageCode = function (phoneNumber, success) {
+const requestGetMessageCode = function (phoneNumber, houseid, success) {
   wx.request({
     url: get_message_code_url,
     data: {
+      hid: houseid,
       phoneNumber: phoneNumber
     },
     success: success,
@@ -138,7 +142,20 @@ const requestGetMyBindRoominfo = function ( user_id, success) {
   })
 }
 
-
+//获取微信支付的参数
+const requestGetPayWxData = function (code, totalMoney,success) {
+  wx.request({
+    url: get_wxdata_topay_url,
+   
+    data: {
+      code: code,
+      totalMoney: totalMoney,
+      body:'充值',
+      type:'充值'
+    },
+    success: success,
+  })
+}
 
 
 
@@ -158,5 +175,6 @@ module.exports = {
   requestGetHaspayBillList: requestGetHaspayBillList,
   requestGetUnpayBillDetail: requestGetUnpayBillDetail,
   requestGetHaspayBillDetail: requestGetHaspayBillDetail,
-  requestGetMyBindRoominfo: requestGetMyBindRoominfo
+  requestGetMyBindRoominfo: requestGetMyBindRoominfo,
+  requestGetPayWxData: requestGetPayWxData
 }

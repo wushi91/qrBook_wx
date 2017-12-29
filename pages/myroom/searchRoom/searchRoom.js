@@ -25,6 +25,7 @@ Page({
     }
     
     this.setData({
+      selectHouseid:'',
       selectBookId:'',
       inputHouseName: e.detail.value
     })
@@ -33,10 +34,11 @@ Page({
   chooseTheHouse: function (e){
     let bookid = e.currentTarget.dataset.bookid
     let address = e.currentTarget.dataset.address
-  
+    let houseid = e.currentTarget.dataset.houseid
     this.setData({
-      inputHouseName: bookid,
+      // inputHouseName: bookid,
       selectBookId: bookid,
+      selectHouseid: houseid,
       inputHouseName: address,
       houseSearchList:[]
     })
@@ -64,7 +66,7 @@ Page({
 
   toConfirmTheHouse: function () {
     wx.redirectTo({
-      url: '/pages/myroom/confirmRoom/confirmRoom?bookid=' + this.data.selectBookId
+      url: '/pages/myroom/confirmRoom/confirmRoom?bookid=' + this.data.selectBookId + '&houseid=' + this.data.selectHouseid
     })
     
     

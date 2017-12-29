@@ -21,15 +21,36 @@ Page({
   },
 
   payTheRenter:function(){
+    wx.login({
+      success:res=>{
+        let code = res.code
+        console.log('code = '+code)
+        request.requestGetPayWxData(code, 1, res => {
+          console.log(res.data)
+          this.wxPay(res.data)
+        })
+      }
+    })
+    
+    
+  },
+
+  wxPay:function(wxData){
     wx.requestPayment({
-      'timeStamp': '',
-      'nonceStr': '',
-      'package': '',
+    'timeStamp': wxData.time_STAMP,
+    'nonceStr': wxData.nonce_STR,
+    'package': wxData.package,
       'signType': 'MD5',
-      'paySign': '',
+      'paySign': wxData.sign,
       'success': function (res) {
+        // console.log('支付成功，跳转页面')
+        wx.redirectTo({
+          url: "/pages/operaResult/operaResult?operaType=pay_success_rent",
+        })
+
       },
       'fail': function (res) {
+        console.log('fail')
       }
     })
   },

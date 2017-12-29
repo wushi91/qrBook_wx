@@ -6,11 +6,12 @@
   </view>
   <view class='input-wrapper'>
     <input class='message-code' type='number' bindinput='bindinputMessage' maxlength='6' placeholder="请输入6位验证码"      placeholder-style="color:rgba(178,178,178,1);"/>
-    <text class='get-message-code' bindtap='getMessageCode'>获取验证码</text>
+    <text wx:if='{{canClickCode}}' class='get-message-code' bindtap='getMessageCode'>{{daojishi}}</text>
+     <text wx:else class='get-message-code' style='opacity: 0.5;'>{{daojishi}}</text>
   </view>
 
   <view class='btn-wrapper'>
-    <button bindtap="chooseTheHouse">绑定该房源</button>
+    <button bindtap="chooseTheHouse" disabled='{{!(phoneNum&&messageCode)}}'>绑定该房源</button>
   </view>
 
   <view class='tip-wrapper'>
