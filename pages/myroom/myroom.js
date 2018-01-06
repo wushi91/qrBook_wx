@@ -19,7 +19,7 @@ Page({
     let userId = util.getMyUserId()
     if (!userId) {
       //未登录
-      this.loginTips()
+      this.toMyUserLogin()
       return
     }
     wx.navigateTo({
@@ -27,6 +27,36 @@ Page({
     })
   },
 
+
+  toMyUserLogin: function () {
+    if (!util.getMyUserId()) {
+      //请求权限，获取微信用户信息
+      wx.getUserInfo({
+        success: res => {
+          let userInfo = res.userInfo
+          res.userInfo.nickName = 'ddd'
+          console.log(res.userInfo)
+          wx.login({
+            success: res => {
+              let code = res.code
+              //获取平台的userId
+              request.requestLoginTogetMyUserId(code, userInfo, res => {
+                console.log(res.data)
+                console.log(res.data.user_id)
+                if (res.data.msg ==='0'){
+                  util.saveMyUserId(res.data.user_id)
+                  wx.navigateTo({
+                    url: '../myroom/searchRoom/searchRoom'
+                  })
+                }
+               
+              })
+            }
+          })
+        }
+      })
+    }
+  },
 
   loginTips: function () {
     wx.showModal({

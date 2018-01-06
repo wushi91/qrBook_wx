@@ -65,6 +65,12 @@ Page({
   },
 
   toConfirmTheHouse: function () {
+    if (!this.data.selectBookId){
+      this.roomHasNoTips()
+      return
+    }
+    
+
     wx.redirectTo({
       url: '/pages/myroom/confirmRoom/confirmRoom?bookid=' + this.data.selectBookId + '&houseid=' + this.data.selectHouseid
     })

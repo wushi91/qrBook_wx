@@ -59,6 +59,6 @@
 }
 
 .btn-wrapper button{
-  margin-top: 180rpx;
+  margin-top: 80rpx;
   padding: 23rpx 189rpx;
 }

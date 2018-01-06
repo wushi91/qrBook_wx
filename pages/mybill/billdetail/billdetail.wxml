@@ -22,6 +22,7 @@
     <button bindtap="payTheRenter">确认交租</button>
     </view>
   </view>
+  
   <view class='bill-deatil-haspay' wx:else>
     
     <view class='room-name-wrapper'>

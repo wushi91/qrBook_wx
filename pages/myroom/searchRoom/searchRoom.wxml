@@ -8,9 +8,8 @@
   </picker>
 
   <view class='address-wrapper'>
-  <textarea bindinput="bindHouseNameInput" placeholder-style="color:rgba(178,178,178,1);" maxlength='70' placeholder="输入小区、房号等信息" value="{{inputHouseName}}"/>
+  <input bindinput="bindHouseNameInput" placeholder-style="color:rgba(178,178,178,1);" maxlength='70' placeholder="搜索小区、房号等信息" value="{{inputHouseName}}"/>
   </view>
-  
   <view class='item-guess-house-wrapper'>
     <view class='item-guess-house' wx:for="{{houseSearchList}}" wx:key data-bookid="{{item.id}}" data-houseid="{{item.hid}}" data-address="{{item.address}}" bindtap='chooseTheHouse'>
       <text>{{item.address}}</text>
@@ -20,7 +19,7 @@
   </view>
 
   <view class='btn-wrapper'>
-    <button class="button-disabled" bindtap="toConfirmTheHouse" disabled='{{selectBookId?false:true}}'>下一步</button>
+    <button class="button-disabled" bindtap="toConfirmTheHouse" disabled='{{inputHouseName?false:true}}'>下一步</button>
   </view>
   
 </view>
