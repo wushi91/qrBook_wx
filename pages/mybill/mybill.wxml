@@ -19,7 +19,7 @@
     </view>
 
     <view class='list-wrapper' wx:if="{{ payStatus==='nopay'}}">
-      <view class='bill-item' wx:for="{{noPayOrederList}}" wx:key data-billid="{{item.id}}"  bindtap='toBillDeatil'>
+      <view class='bill-item' wx:for="{{noPayOrederList}}" wx:key data-billid="{{item.id}}" data-title="{{item.title}}" bindtap='toBillDeatil'>
       <view class='bill-item-title-wrapper'>
         <text class='bill-item-title'>{{item.title}}</text>
         <text class='bill-item-time'>{{item.start_time}}-{{item.end_time}}</text>
@@ -29,7 +29,7 @@
     </view>
     
     <view class='list-wrapper' wx:else>
-      <view class='bill-item' wx:for="{{hasPayOrederList}}" data-billid="{{item.pay_id}}"  wx:key bindtap='toBillDeatil'>
+      <view class='bill-item' wx:for="{{hasPayOrederList}}" data-billid="{{item.pay_id}}" data-title="{{item.title}}"  wx:key bindtap='toBillDeatil'>
       <view class='bill-item-title-wrapper' >
         <text class='bill-item-title'>{{item.title}}</text>
         <text class='bill-item-time'>{{item.start_time}}-{{item.end_time}}</text>

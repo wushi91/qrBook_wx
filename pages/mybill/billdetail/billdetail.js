@@ -17,6 +17,7 @@ Page({
     payStatus: 'haspay',
     billid:'',
     billBean:{},
+    title:''
 
   },
 
@@ -24,8 +25,9 @@ Page({
     wx.login({
       success:res=>{
         let code = res.code
-        console.log('code = '+code)
-        request.requestGetPayWxData(code, 1, res => {
+        let hid = this.data.billBean.hid
+        let title = this.data.billBean.title
+        request.requestGetPayWxData(code, hid, title,1, res => {
           console.log(res.data)
           this.wxPay(res.data)
         })
@@ -62,7 +64,7 @@ Page({
         // console.log(res.data)
         let billBean = res.data.list
         billBean.end_time = util.getFormateDate(billBean.end_time)
-        billBean.start_time = util.getFormateDate(billBean.start_time) 
+        billBean.start_time = util.getFormateDate(billBean.start_time)
         if (res.data.msg==='0'){
           this.setData({
             billBean: billBean,
@@ -76,7 +78,8 @@ Page({
   toGetTheHasPayDeatil:function(billid){
     if (billid) {
       let userId = util.getMyUserId()
-      request.requestGetHaspayBillDetail(userId, billid, res => {
+      let title = this.data.title
+      request.requestGetHaspayBillDetail(userId, billid,title, res => {
         // console.log(res.data)
 
         if (res.data.msg === '0') {
@@ -96,10 +99,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     this.setData({
       payStatus: options.payStatus,
-      billid: options.billid
+      billid: options.billid,
+      title: options.title
     })
+
+    console.log(this.data.title)
     if (options.payStatus ==='nopay'){
       this.toGetTheNoPayDeatil(options.billid)
     }else{

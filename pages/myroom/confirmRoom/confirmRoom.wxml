@@ -11,7 +11,7 @@
   </view>
 
   <view class='btn-wrapper'>
-    <button bindtap="chooseTheHouse" disabled='{{!(phoneNum&&messageCode)}}'>绑定该房源</button>
+    <button class='main-button {{(phoneNum&&messageCode)?"":"disabled"}}' bindtap="chooseTheHouse" disabled='{{(phoneNum&&messageCode)?false:true}}'>绑定该房源</button>
   </view>
 
   <view class='tip-wrapper'>

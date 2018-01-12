@@ -60,5 +60,8 @@
 
 .btn-wrapper button{
   margin-top: 80rpx;
-  padding: 23rpx 189rpx;
+}
+
+input:focus{
+  color: red;
 }

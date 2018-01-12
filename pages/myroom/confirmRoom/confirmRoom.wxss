@@ -44,11 +44,7 @@
   text-align: center;
 }
 
-.btn-wrapper button{
-  width: 480rpx;
-  padding-top: 23rpx;
-  padding-bottom: 23rpx;
-}
+
 
 .tip-wrapper{
   margin-top: 40rpx;

@@ -1,5 +1,7 @@
-// const host = 'http://192.168.2.220:8080'
-const host = 'https://www.0755qr.com'
+// const host = 'http://192.168.2.221:8080'
+const host = 'http://192.168.2.119:8080'
+// const host = 'http://139.199.16.224:80'
+// const host = 'https://www.0755qr.com'
 
 //登录
 const login_get_user_id_url = host+'/rentBook/user/authorise.do'
@@ -121,12 +123,13 @@ const requestGetUnpayBillDetail = function (user_id,billid, success) {
   })
 }
 //已支付的账单详细
-const requestGetHaspayBillDetail = function (user_id,billid, success) {
+const requestGetHaspayBillDetail = function (user_id, billid, title, success) {
   wx.request({
     url: get_haspay_billdetail_url,
     data: {
       pay_id: billid,
-      user_id: user_id
+      user_id: user_id,
+      title:title
     },
     success: success,
   })
@@ -143,13 +146,17 @@ const requestGetMyBindRoominfo = function ( user_id, success) {
 }
 
 //获取微信支付的参数
-const requestGetPayWxData = function (code, totalMoney,success) {
+const requestGetPayWxData = function (code, hid,title,totalMoney,success) {
   wx.request({
     url: get_wxdata_topay_url,
    
     data: {
       code: code,
+      hid: hid,
+      title:title,
       totalMoney: totalMoney,
+      
+      
       body:'充值',
       type:'充值'
     },

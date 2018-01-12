@@ -19,7 +19,7 @@
   </view>
 
     <view class='btn-wrapper'>
-    <button bindtap="payTheRenter">确认交租</button>
+    <button class='main-button' bindtap="payTheRenter">确认交租</button>
     </view>
   </view>
   

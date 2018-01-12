@@ -12,8 +12,7 @@ Page({
     messageCode:'',
     bookid:'',
     houseid: '',
-
-
+    
     seconds: 60,
     daoji_timer: 60,
     daojishi: '获取验证码',

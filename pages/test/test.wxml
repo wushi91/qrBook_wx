@@ -1,0 +1,11 @@
+<!--pages/test/test.wxml-->
+<view class='wrapper'>
+<view class="m-load2">
+    <view class="item"></view>
+    <view class="item"></view>
+    <view class="item"></view>
+    <view class="item"></view>
+    <view class="item"></view>
+    <view class="point"></view>
+</view>
+</view>

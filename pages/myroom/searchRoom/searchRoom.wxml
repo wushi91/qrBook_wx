@@ -19,7 +19,7 @@
   </view>
 
   <view class='btn-wrapper'>
-    <button class="button-disabled" bindtap="toConfirmTheHouse" disabled='{{inputHouseName?false:true}}'>下一步</button>
+    <button class='main-button {{inputHouseName?"":"disabled"}}'  bindtap="toConfirmTheHouse" disabled='{{inputHouseName?false:true}}'>下一步</button>
   </view>
   
 </view>

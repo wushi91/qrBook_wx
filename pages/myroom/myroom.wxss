@@ -23,9 +23,6 @@
 
  .has-no-room button{
   margin-top: 160rpx;
-  width: 480rpx;
-  padding-top: 23rpx;
-  padding-bottom: 23rpx;
 }
 
 

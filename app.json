@@ -1,15 +1,18 @@
 {
   "pages": [
+   
     "pages/myroom/myroom",
-    "pages/mybill/mybill",
     "pages/myroom/confirmRoom/confirmRoom",
+    "pages/mybill/mybill",
     "pages/myroom/searchRoom/searchRoom",
-    "pages/myinfo/myinfo", 
+    "pages/myinfo/myinfo",
     "pages/mybill/billdetail/billdetail",
     "pages/operaResult/operaResult",
     "pages/index/index",
     "pages/logs/logs"
+    
   ],
+  
   "window": {
     "navigationBarTitleText": "租房账本",
     "backgroundTextStyle": "light",

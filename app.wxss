@@ -20,7 +20,28 @@ html,page{
 }
 
 
-button{
+
+button.main-button{
+  width: 480rpx;
+  background-color: #2E8AE6;
+  padding: 23rpx 0rpx;
+  font-size:34rpx;
+  color:rgba(255,255,255,1);
+  line-height:48rpx;
+  border-radius: 10rpx 
+}
+
+button.main-button:active{
+  background-color: rgb(41, 123, 206);
+}
+
+button.main-button.disabled{
+  background-color: rgb(172, 209, 245);
+  color:rgba(255,255,255,1);
+}
+
+
+/* button{
   display: inline-block;
   background-color:rgba(46,138,230,1);
   border-radius: 10rpx ; 
@@ -34,7 +55,7 @@ button:active{
   color:rgba(255,255,255,1);
 }
 
-utton[disabled][type="default"], wx-button[disabled]:not([type]){
+button[disabled][type="default"], wx-button[disabled]:not([type]){
   background-color: rgb(164, 201, 239);
   color:rgba(255,255,255,1);
-}
+} */

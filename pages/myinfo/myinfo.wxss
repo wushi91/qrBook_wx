@@ -9,7 +9,8 @@
 
 .user-info-wrapper .header-image{
   margin-top: 30rpx;
-  border-radius: 120rpx;
+  
+  border-radius: 50%;
   width: 160rpx;
   height: 160rpx;
 }

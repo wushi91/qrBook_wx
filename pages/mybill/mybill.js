@@ -28,14 +28,17 @@ Page({
   toBillDeatil:function(e){
     var payStatus = this.data.payStatus
     let billid = e.currentTarget.dataset.billid
+    let title = e.currentTarget.dataset.title
     wx.navigateTo({
-      url: "/pages/mybill/billdetail/billdetail?payStatus=" + payStatus + "&billid=" + billid
+      url: "/pages/mybill/billdetail/billdetail?payStatus=" + payStatus + "&billid=" + billid +'&title='+title
     })
   },
 
   toShowBlank(){
     this.setData({
-      isBlankBill: this.data.noPayOrederList.length === 0 && this.data.hasPayOrederList.length === 0
+
+      // isBlankBill: this.data.noPayOrederList.length === 0 && this.data.hasPayOrederList.length === 0
+      isBlankBill:false
     })
   },
 
