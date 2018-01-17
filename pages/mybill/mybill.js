@@ -12,21 +12,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isBlankBill:false,
-    payStatus:'nopay',
-    noPayOrederList: [],
-    hasPayOrederList: []
+
+    tab_status: [{ prop: 'nopay', label: '待支付' },
+    { prop: 'haspay', label: '已支付' },],
+    currentStatus: 'nopay',
+
+    noPayOrederList: null,
+    hasPayOrederList: null
   },
 
-
   payTabClick: function (e) {
+    let currentStatus = e.currentTarget.dataset.currentStatus
     this.setData({
-      payStatus: e.currentTarget.dataset.paystatus
+      currentStatus: currentStatus
     })
   },
 
+  
+
   toBillDeatil:function(e){
-    var payStatus = this.data.payStatus
+    var payStatus = this.data.currentStatus
     let billid = e.currentTarget.dataset.billid
     let title = e.currentTarget.dataset.title
     wx.navigateTo({
@@ -34,60 +39,72 @@ Page({
     })
   },
 
-  toShowBlank(){
-    this.setData({
+  // toShowBlank(){
+  //   this.setData({
 
-      // isBlankBill: this.data.noPayOrederList.length === 0 && this.data.hasPayOrederList.length === 0
-      isBlankBill:false
+  //     // isBlankBill: this.data.noPayOrederList.length === 0 && this.data.hasPayOrederList.length === 0
+  //     isBlankBill:false
+  //   })
+  // },
+
+
+  getUnpayBill: function (userId){
+    request.requestGetUnpayBillList(userId, res => {
+      
+      let noPayOrederList = res.data.list
+
+      for (let i = 0; i < noPayOrederList.length; i++) {
+        let item = noPayOrederList[i]
+        item.end_time = util.getFormateDate(item.end_time)
+        item.start_time = util.getFormateDate(item.start_time)
+      }
+
+      this.setData({
+        noPayOrederList: noPayOrederList
+      })
+
+    },res=>{
+
+      this.setData({
+        noPayOrederList: null
+      })
+      
+    })
+  },
+
+  getHaspayBill: function (userId){
+    request.requestGetHaspayBillList(userId, res => {
+      console.log(res.data)
+      
+      let hasPayOrederList = res.data.list
+      for (let i = 0; i < hasPayOrederList.length; i++) {
+        let item = hasPayOrederList[i]
+        if (!isNaN(item.balance)) { item.balance = item.balance / 100 }
+        item.end_time = util.getFormateDate(item.end_time)
+        item.start_time = util.getFormateDate(item.start_time)
+      }
+
+      this.setData({
+        hasPayOrederList: hasPayOrederList
+      })
+
+    },res=>{
+
+      this.setData({
+        hasPayOrederList: null
+      })
     })
   },
 
   toGetAllBillList: function (){
     let userId = util.getMyUserId()
+    if (!userId) {
+      //还没有登录
+      return
+    }
     //待支付的账单列表
-    request.requestGetUnpayBillList(userId, res => {
-      console.log(res.data)
-      if (res.data.msg === '0') {
-        let noPayOrederList = res.data.list
-
-        for (let i = 0; i < noPayOrederList.length; i++) {
-          let item = noPayOrederList[i]
-          item.end_time = util.getFormateDate(item.end_time)
-          item.start_time = util.getFormateDate(item.start_time) 
-        }
-       
-        this.setData({
-          noPayOrederList: noPayOrederList
-        })
-      } else {
-        this.setData({
-          noPayOrederList: []
-        })
-      }
-      this.toShowBlank()
-    })
-
-    request.requestGetHaspayBillList(userId, res => {
-      // console.log(res.data)
-
-      if (res.data.msg === '0') {
-        let hasPayOrederList = res.data.list
-        for (let i = 0; i < hasPayOrederList.length; i++) {
-          let item = hasPayOrederList[i]
-          item.end_time = util.getFormateDate(item.end_time)
-          item.start_time = util.getFormateDate(item.start_time)
-        }
-
-        this.setData({
-          hasPayOrederList: hasPayOrederList
-        })
-      } else {
-        this.setData({
-          hasPayOrederList: []//res.data.list
-        })
-      }
-      this.toShowBlank()
-    })
+    this.getUnpayBill(userId)
+    this.getHaspayBill(userId)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -99,7 +116,6 @@ Page({
     let userId = util.getMyUserId()
     if (!userId) {
       //还没有登录
-      this.toShowBlank()
       return
     }
 
@@ -139,7 +155,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.toGetAllBillList()
   },
 
   /**

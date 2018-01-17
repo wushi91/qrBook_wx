@@ -27,7 +27,7 @@ Page({
     this.setData({
       selectHouseid:'',
       selectBookId:'',
-      inputHouseName: e.detail.value
+      
     })
   },
 
@@ -51,16 +51,14 @@ Page({
     // address ? "":address = this.data.inputHouseName
     request.requestToSearchHouse(province, city, address, res => {
       console.log(res.data)
-      if (res.data.msg === '0') {
-        //有数据
-        this.setData({
-          houseSearchList: res.data.list
-        })
-      } else {
-        this.setData({
-          houseSearchList: []
-        })
-      }
+      //有数据
+      this.setData({
+        houseSearchList: res.data.list
+      })
+    },res=>{
+      this.setData({
+        houseSearchList: []
+      })
     })
   },
 

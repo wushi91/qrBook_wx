@@ -22,14 +22,25 @@ Page({
   },
 
   payTheRenter:function(){
+
+    wx.showLoading({
+      title: '请求中',
+    })
     wx.login({
       success:res=>{
         let code = res.code
         let hid = this.data.billBean.hid
         let title = this.data.billBean.title
-        request.requestGetPayWxData(code, hid, title,1, res => {
+        let money = this.data.billBean.balance*100
+        request.requestGetPayWxData(code, hid, title, 1, res => {
+          wx.hideLoading()
           console.log(res.data)
           this.wxPay(res.data)
+        }, res=>{
+          wx.hideLoading()
+          console.log(res.data)
+          this.wxPay(res.data)
+          
         })
       }
     })
@@ -38,10 +49,11 @@ Page({
   },
 
   wxPay:function(wxData){
+    
     wx.requestPayment({
-    'timeStamp': wxData.time_STAMP,
-    'nonceStr': wxData.nonce_STR,
-    'package': wxData.package,
+      'timeStamp': wxData.time_STAMP,
+      'nonceStr': wxData.nonce_STR,
+      'package': wxData.package,
       'signType': 'MD5',
       'paySign': wxData.sign,
       'success': function (res) {
@@ -65,12 +77,11 @@ Page({
         let billBean = res.data.list
         billBean.end_time = util.getFormateDate(billBean.end_time)
         billBean.start_time = util.getFormateDate(billBean.start_time)
-        if (res.data.msg==='0'){
-          this.setData({
-            billBean: billBean,
-          })
-        }
-        
+        this.setData({
+          billBean: billBean,
+        })
+      },res=>{
+        console.log(res)
       })
     }
   },
@@ -81,17 +92,16 @@ Page({
       let title = this.data.title
       request.requestGetHaspayBillDetail(userId, billid,title, res => {
         // console.log(res.data)
-
-        if (res.data.msg === '0') {
-          let billBean = res.data.list
-          billBean.end_time = util.getFormateDate(billBean.end_time)
-          billBean.start_time = util.getFormateDate(billBean.start_time) 
-          billBean.trading_time = util.formatTime(new Date(billBean.trading_time))
-          this.setData({
-            billBean: billBean,
-          })
-        }
-
+        let billBean = res.data.list
+        if (!isNaN(billBean.balance)) { billBean.balance = billBean.balance / 100 }
+        billBean.end_time = util.getFormateDate(billBean.end_time)
+        billBean.start_time = util.getFormateDate(billBean.start_time) 
+        billBean.trading_time = util.formatTime(new Date(billBean.trading_time))
+        this.setData({
+           billBean: billBean,
+        })
+      },res=>{
+        console.log(res)
       })
     }
   },

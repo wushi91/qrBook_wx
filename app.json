@@ -1,9 +1,9 @@
 {
   "pages": [
-   
+   "pages/mybill/mybill",
     "pages/myroom/myroom",
     "pages/myroom/confirmRoom/confirmRoom",
-    "pages/mybill/mybill",
+    
     "pages/myroom/searchRoom/searchRoom",
     "pages/myinfo/myinfo",
     "pages/mybill/billdetail/billdetail",
@@ -15,7 +15,7 @@
   
   "window": {
     "navigationBarTitleText": "租房账本",
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#2E8AE6",
     "navigationBarTextStyle": "white"
   },

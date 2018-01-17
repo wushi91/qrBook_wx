@@ -22,34 +22,6 @@
   line-height:48rpx;
 }
 
-.has-bill .my-top-tab{
-  position: fixed;
-  width: 100%;
-  background-color: #F7F7FA;
-  top: 0;
-  display: flex;
-  border-bottom: 1px solid #E3E3E6;
-}
-
-.my-top-tab .tab-item{
-  text-align: center;
-  width: 50%;
-}
-
-.tab-item text{
-  box-sizing: border-box;
-  display: inline-block;
-  padding: 27rpx 40rpx;
-  font-size:28rpx;
-  color:rgba(53,53,53,1);
-  line-height:40rpx;
-  border-bottom:  8rpx solid rgba(0,0,0,0);
-}
-
-.tab-item-select text{
-  color: #2E8AE6;
-   border-bottom:  8rpx solid #2E8AE6; 
-}
 
 .list-wrapper{
   padding-top: 100rpx;

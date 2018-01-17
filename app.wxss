@@ -41,6 +41,35 @@ button.main-button.disabled{
 }
 
 
+/*自定义的tobtab  */
+.tob-tab{
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+  background-color: #F7F7FA;
+  display: flex;
+  border-bottom: 1px solid #E3E3E6;
+}
+.tob-tab .tob-tab-item{
+  flex: 1;
+  text-align: center;
+}
+
+.tob-tab .tob-tab-item text{
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 27rpx 40rpx;
+  font-size:28rpx;
+  color:rgba(53,53,53,1);
+  line-height:40rpx;
+  border-bottom: 8rpx solid rgba(0,0,0,0);
+}
+
+.tob-tab .tob-tab-item-select text{
+  color: #2E8AE6;
+  border-bottom:  8rpx solid #2E8AE6; 
+}
+
 /* button{
   display: inline-block;
   background-color:rgba(46,138,230,1);

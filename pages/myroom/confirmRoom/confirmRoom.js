@@ -42,18 +42,11 @@ Page({
   chooseTheHouse:function(){
     //首先验证短信码
     request.requestCheckMessageCode(this.data.phoneNum, this.data.messageCode,res=>{
-      console.log('验证短信码')
       console.log(res.data)
-      if (res.data.msg==="0"){
-        //之后要进行绑定房源
-        this.bindTheHouse()
-      }else{
-        
-      }
+      //之后要进行绑定房源
+      this.bindTheHouse()
     })
-    // wx.redirectTo({
-    //   url: "/pages/operaResult/operaResult?operaType=confirm_house_success",
-    // })
+
   },
 
   roomHasNoTips: function () {
@@ -73,16 +66,13 @@ Page({
     }
     let userId = util.getMyUserId()
     request.requestToConfirmHouse(this.data.bookid, this.data.phoneNum, userId, res => {
-
-      if (res.data.msg === "0") {
-        //绑定成功，跳转页面
-        wx.redirectTo({
-          url: "/pages/operaResult/operaResult?operaType=confirm_house_success",
-        })
-      }else{
-        //对话框提示
-        this.roomHasNoTips()
-      }
+      //绑定成功，跳转页面
+      wx.redirectTo({
+        url: "/pages/operaResult/operaResult?operaType=confirm_house_success",
+      })
+    },res=>{
+      //对话框提示
+      this.roomHasNoTips()
     })
   },
   bindinputPhoneNum:function(e){
@@ -122,15 +112,15 @@ Page({
     })
     this.waitToGetRegisteCode()
     request.requestGetMessageCode(this.data.phoneNum, this.data.houseid,res=>{
-      console.log(res.data)
-      if (res.data.msg==='0'){
-
-      }else{
-        //对话框提示
-        this.roomHasNoTips()
-
-      }
       
+    },res=>{
+      //对话框提示
+
+      this.roomHasNoTips()
+
+      this.setData({
+        daoji_timer:1
+      })
     })
 
     

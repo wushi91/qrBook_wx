@@ -83,22 +83,22 @@ Page({
       //未登录
       return
     }
-    request.requestGetMyBindRoominfo(userId, res => {
-      
-      if (res.data.msg === '0') {
-        let myBindRoom = res.data.list
-        myBindRoom.end_time = util.getFormateDate(myBindRoom.end_time)
-        myBindRoom.start_time = util.getFormateDate(myBindRoom.start_time) 
-        this.setData({
-          isBlankRoom: false,
-          myBindRoom: myBindRoom
-        })
 
-      } else {
-        this.setData({
-          isBlankRoom: true
-        })
-      }
+    console.log('res')
+    request.requestGetMyBindRoominfo(userId, res => {
+      console.log(res)
+      let myBindRoom = res.data.list
+      myBindRoom.end_time = util.getFormateDate(myBindRoom.end_time)
+      myBindRoom.start_time = util.getFormateDate(myBindRoom.start_time)
+      this.setData({
+        isBlankRoom: false,
+        myBindRoom: myBindRoom
+      })
+    },res=>{
+      console.log(res.data)
+      this.setData({
+        isBlankRoom: true
+      })
     })
 
   },
@@ -153,7 +153,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.toGetMyBindRoom()
   },
 
   /**

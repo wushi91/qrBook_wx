@@ -1,4 +1,6 @@
+const util = require('../utils/util.js')
 // const host = 'http://192.168.2.221:8080'
+
 const host = 'http://192.168.2.119:8080'
 // const host = 'http://139.199.16.224:80'
 // const host = 'https://www.0755qr.com'
@@ -28,140 +30,129 @@ const get_wxdata_topay_url = host +'/rentBook/pay/getWxPayParameters.do'
 
 
 //登录
-const requestLoginTogetMyUserId = function (wxCode, wxUserInfo, success) {
-  wx.request({
-    url: login_get_user_id_url, 
-    data: {
-      code: wxCode,
-      userInfo: wxUserInfo
-    },
-    success: success,
-  })
+const requestLoginTogetMyUserId = function (wxCode, wxUserInfo, code200) {
+  let data = {
+    code: wxCode,
+    userInfo: wxUserInfo
+  }
+  util.wxGet(login_get_user_id_url, data, code200)
 }
 
 //搜索房源 该市所有房源下
-const requestToSearchHouse = function (province, city, address,success) {
-  wx.request({
-    url: to_search_house_url,
-    data: {
-      province: province,
-      city: city,
-      address: address
-    },
-    success: success,
-  })
+const requestToSearchHouse = function (province, city, address, code200,error) {
+  
+  let url = to_search_house_url
+  let data = {
+    province: province,
+    city: city,
+    address: address
+  }
+  util.wxGet(url, data, code200, error)
+
 }
 
 //获取手机验证码
-const requestGetMessageCode = function (phoneNumber, houseid, success) {
-  wx.request({
-    url: get_message_code_url,
-    data: {
-      hid: houseid,
-      phoneNumber: phoneNumber
-    },
-    success: success,
-  })
+const requestGetMessageCode = function (phoneNumber, houseid, code200,error) {
+  let url = get_message_code_url
+  let data = {
+    hid: houseid,
+    phoneNumber: phoneNumber
+  }
+  util.wxGet(url, data, code200, error)
 }
 
 //验证手机验证码
-const requestCheckMessageCode = function (phoneNumber, messageCode,success) {
-  wx.request({
-    url: check_message_code_url,
-    data: {
-      phoneNumber: phoneNumber,
-      inputverificationCode: messageCode
-    },
-    success: success,
-  })
+const requestCheckMessageCode = function (phoneNumber, messageCode, code200,error) {
+  let url = check_message_code_url
+  let data = {
+    phoneNumber: phoneNumber,
+    inputverificationCode: messageCode
+  }
+  util.wxGet(url, data, code200,error)
 }
 
 //绑定房源
-const requestToConfirmHouse = function (bookid, phoneNumber, user_id,success){
-  wx.request({
-    url: to_confirm_house_url,
-    data: {
-      id: bookid,
-      phoneNumber: phoneNumber,
-      user_id: user_id
-    },
-    success: success,
-  })
+const requestToConfirmHouse = function (bookid, phoneNumber, user_id, code200,error){
+
+
+  let url = to_confirm_house_url
+  let data = {
+    id: bookid,
+    phoneNumber: phoneNumber,
+    user_id: user_id
+  }
+  util.wxGet(url, data, code200, error)
 }
 
+
+
 //待支付的账单列表
-const requestGetUnpayBillList = function (user_id, success) {
-  wx.request({
-    url: get_unpay_billlist_url,
-    data: {
-      user_id: user_id
-    },
-    success: success,
-  })
+const requestGetUnpayBillList = function (user_id, code200, error) {
+
+  let url = get_unpay_billlist_url
+  let data = {
+    user_id: user_id
+  }
+  util.wxGet(url, data, code200, error)
 }
 
 
 //已支付的账单列表
-const requestGetHaspayBillList = function (user_id, success) {
-  wx.request({
-    url: get_haspay_billlist_url,
-    data: {
-      user_id: user_id
-    },
-    success: success,
-  })
+const requestGetHaspayBillList = function (user_id, code200,error) {
+  let url = get_haspay_billlist_url
+  let data = {
+    user_id: user_id
+  }
+  util.wxGet(url, data, code200, error)
 }
+
+
 //待支付的账单详细
-const requestGetUnpayBillDetail = function (user_id,billid, success) {
-  wx.request({
-    url: get_unpay_billdetail_url,
-    data: {
-      id: billid,
-      user_id: user_id
-    },
-    success: success,
-  })
+const requestGetUnpayBillDetail = function (user_id, billid, code200,error) {
+
+
+  let url = get_unpay_billdetail_url
+  let data = {
+    id: billid,
+    user_id: user_id
+  }
+  util.wxGet(url, data, code200,error)
 }
+
+
 //已支付的账单详细
-const requestGetHaspayBillDetail = function (user_id, billid, title, success) {
-  wx.request({
-    url: get_haspay_billdetail_url,
-    data: {
-      pay_id: billid,
-      user_id: user_id,
-      title:title
-    },
-    success: success,
-  })
+const requestGetHaspayBillDetail = function (user_id, billid, title, code200, error) {
+  let url = get_haspay_billdetail_url
+  let data = {
+    pay_id: billid,
+    user_id: user_id,
+    title: title
+  }
+  util.wxGet(url, data, code200,error)
 }
+
+
 //获取我的绑定房源
-const requestGetMyBindRoominfo = function ( user_id, success) {
-  wx.request({
-    url: get_mybind_room_url,
-    data: {
-      user_id: user_id
-    },
-    success: success,
-  })
+const requestGetMyBindRoominfo = function (user_id, code200,error) {
+  let url = get_mybind_room_url
+  let data = {
+    user_id: user_id
+  }
+  util.wxGet(url, data, code200,error)
 }
 
 //获取微信支付的参数
-const requestGetPayWxData = function (code, hid,title,totalMoney,success) {
-  wx.request({
-    url: get_wxdata_topay_url,
-   
-    data: {
-      code: code,
-      hid: hid,
-      title:title,
-      totalMoney: totalMoney,
-      
-      
-      body:'充值',
-      type:'充值'
-    },
-    success: success,
-  })
+const requestGetPayWxData = function (code, hid, title, totalMoney, code200,error) {
+  let url = get_wxdata_topay_url
+  let data = {
+    code: code,
+    hid: hid,
+    title: title,
+    totalMoney: totalMoney,
+    body: '充值',
+    type: '充值'
+  }
+  util.wxGet(url, data, code200, error)
 }
 
 
