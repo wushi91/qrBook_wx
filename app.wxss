@@ -62,12 +62,12 @@ button.main-button.disabled{
   font-size:28rpx;
   color:rgba(53,53,53,1);
   line-height:40rpx;
-  border-bottom: 8rpx solid rgba(0,0,0,0);
+  border-bottom: 4rpx solid rgba(0,0,0,0);
 }
 
 .tob-tab .tob-tab-item-select text{
   color: #2E8AE6;
-  border-bottom:  8rpx solid #2E8AE6; 
+  border-bottom:  4rpx solid #2E8AE6; 
 }
 
 /* button{

@@ -40,10 +40,12 @@
   font-size:64rpx;
   color:rgba(242,73,73,1);
   line-height:90rpx;
+  font-weight:bold;
 }
 
 .bill-info-item .bill-money::after{
   content:'元';
+  font-weight:normal;
   font-size:45rpx;
 }
 
@@ -71,6 +73,10 @@
   line-height:48rpx;
   padding:20rpx 30rpx;
   margin-bottom: 20rpx;
+}
+
+.room-name{
+  font-size:34rpx;
 }
 
 .bill-deatil-haspay .bill-info-item-wrapper{
@@ -103,12 +109,13 @@ line-height:42rpx;
 }
 
 .bill-info-haspay-item .bill-money{
-  font-size:48rpx;
+  font-size:64rpx;
 color:rgba(41,204,57,1);
 line-height:67rpx;
+font-weight: bold;
 }
 
 .bill-info-haspay-item .bill-money::after{
   content:'元';
-  font-size:32rpx;
+  font-size:34rpx;
 }

@@ -52,7 +52,7 @@
 }
 
 .has-room .line{
-  background-color: #DEDEDE;
+  background-color: #E6E6E6;
   height: 2rpx;
 }
 

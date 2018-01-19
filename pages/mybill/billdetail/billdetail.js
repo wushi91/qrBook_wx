@@ -23,16 +23,17 @@ Page({
 
   payTheRenter:function(){
 
-    wx.showLoading({
-      title: '请求中',
-    })
+    // wx.showLoading({
+    //   title: '请求中',
+    // })
     wx.login({
       success:res=>{
         let code = res.code
         let hid = this.data.billBean.hid
         let title = this.data.billBean.title
         let money = this.data.billBean.balance*100
-        request.requestGetPayWxData(code, hid, title, 1, res => {
+        // money =1
+        request.requestGetPayWxData(code, hid, title, money, res => {
           wx.hideLoading()
           console.log(res.data)
           this.wxPay(res.data)

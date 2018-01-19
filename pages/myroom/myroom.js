@@ -45,9 +45,10 @@ Page({
                 console.log(res.data.user_id)
                 if (res.data.msg ==='0'){
                   util.saveMyUserId(res.data.user_id)
-                  wx.navigateTo({
-                    url: '../myroom/searchRoom/searchRoom'
-                  })
+                  // wx.navigateTo({
+                  //   url: '../myroom/searchRoom/searchRoom'
+                  // })
+                  this.toGetMyBindRoom()
                 }
                
               })
@@ -76,7 +77,7 @@ Page({
       }
     })
   },
-
+  
   toGetMyBindRoom:function(){
     let userId = util.getMyUserId()
     if (!userId){

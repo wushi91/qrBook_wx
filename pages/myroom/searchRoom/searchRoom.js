@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    region: ['广东省', '深圳市', '罗湖区'],//默认值
+    region: [],//默认值
     inputHouseName:'',
     selectBookId:'',
     houseSearchList: [],//{ name: 'B101' }, { name: 'D101' }, { name: 'D102' }, { name: 'B401' }
@@ -86,11 +86,31 @@ Page({
     })
   },
 
+
+  toGetLocationByWxGPS: function () {
+    wx.getLocation({
+      success: res => {
+        let lb = res
+        request.requestBaiduAddress(lb, res => {
+          console.log(res)
+          let address = res.data.result.addressComponent
+          let province = address.province
+          let city = address.city
+          let district = address.district
+          this.setData({
+            region: [province, city, district],
+          })
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
   
+
+    this.toGetLocationByWxGPS()
   },
 
   /**

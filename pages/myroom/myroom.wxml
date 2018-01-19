@@ -7,10 +7,10 @@
   </view>
   <view wx:else class='has-room'>
     <text class='room-name'>{{myBindRoom.address}}</text>
-    <view class='has-room-item'>
+    <!-- <view class='has-room-item'>
       <text>房东手机号</text>
       <text>{{myBindRoom.phone_num }}</text>
-    </view>
+    </view> -->
     <view class='line'></view>
     <view class='has-room-item'>
       <text>起租日期</text>

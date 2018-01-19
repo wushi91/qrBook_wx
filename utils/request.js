@@ -1,9 +1,9 @@
 const util = require('../utils/util.js')
 // const host = 'http://192.168.2.221:8080'
 
-const host = 'http://192.168.2.119:8080'
-// const host = 'http://139.199.16.224:80'
-// const host = 'https://www.0755qr.com'
+// const host = 'http://192.168.2.119:8080'
+// const host = 'http://139.199.16.2214:80'
+const host = 'https://www.0755qr.com'
 
 //登录
 const login_get_user_id_url = host+'/rentBook/user/authorise.do'
@@ -35,6 +35,8 @@ const requestLoginTogetMyUserId = function (wxCode, wxUserInfo, code200) {
     code: wxCode,
     userInfo: wxUserInfo
   }
+  // console.log('接口里面')
+  console.log(data)
   util.wxGet(login_get_user_id_url, data, code200)
 }
 
@@ -156,6 +158,19 @@ const requestGetPayWxData = function (code, hid, title, totalMoney, code200,erro
 }
 
 
+const requestBaiduAddress = function (lb, success) {
+  let ak = 'It0GdmpH8Rl8P8oUNwqSUi4ZKOIuGKlA'//需要个人申请
+  let url = 'https://api.map.baidu.com/geocoder/v2/?ak=' + ak + '&location=' + lb.latitude + ',' + lb.longitude + '&output=json&coordtype=wgs84ll'
+
+  wx.request({
+    url: url,
+    success: success,
+    fail: res => {
+      console.log(res)
+    }
+  })
+}
+
 
 
 
@@ -174,5 +189,6 @@ module.exports = {
   requestGetUnpayBillDetail: requestGetUnpayBillDetail,
   requestGetHaspayBillDetail: requestGetHaspayBillDetail,
   requestGetMyBindRoominfo: requestGetMyBindRoominfo,
-  requestGetPayWxData: requestGetPayWxData
+  requestGetPayWxData: requestGetPayWxData,
+  requestBaiduAddress
 }

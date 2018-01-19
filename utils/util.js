@@ -24,10 +24,27 @@ const saveMyUserId = function (user_id) {
 }
 
 
-const getFormateDate=function (time) {
+
+const getFormateDate = function (time) {
   let date = new Date(time)
-  return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return [year, month, day].map(formatNumber).join('/')
 }
+
+const getFormateDateWithTime = function (time) {
+  let date = new Date(time)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
 
 //基础封装
 const wxGet = function (url, data, code200, error) {
@@ -49,6 +66,11 @@ const wxGet = function (url, data, code200, error) {
     },
     fail: res => {
       wx.stopPullDownRefresh() //停止下拉刷新
+      wx.showToast({
+        title: '网络出现问题，请稍候重试',
+        icon: 'none',
+        mask: true,
+      })
       if (error) {
         error(res)
       } else {
